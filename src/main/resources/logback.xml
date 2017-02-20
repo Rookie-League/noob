@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="10 seconds" debug="true">
     <!--Spring Boot默认的logback配置-->
     <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
-    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
     <property name="LOG_HOME" value="logs/noob"/>
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
@@ -116,6 +116,11 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+    <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>101.37.35.46:9998</destination>
+        <!-- encoder is required -->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
     <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
     <!--
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
@@ -126,7 +131,8 @@
      -->
     <!-- 日志输出级别 -->
     <root level="INFO">
-        <!--<appender-ref ref="STDOUT"/>-->
+        <!--<appender-ref ref="STDOUT"/>
+        <appender-ref ref="stash"/>-->
         <appender-ref ref="debugFile"/>
         <appender-ref ref="infoFile"/>
         <appender-ref ref="warnFile"/>
