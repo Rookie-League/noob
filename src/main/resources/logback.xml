@@ -116,11 +116,11 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-    <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <!-- encoder is required -->
+    <!--<appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>101.37.35.46:9998</destination>
-        <!-- encoder is required -->
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
-    </appender>
+    </appender>-->
     <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
     <!--
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
@@ -131,8 +131,10 @@
      -->
     <!-- 日志输出级别 -->
     <root level="INFO">
-        <!--<appender-ref ref="STDOUT"/>
-        <appender-ref ref="stash"/>-->
+        <appender-ref ref="STDOUT"/>
+        <!--
+        <appender-ref ref="stash"/>
+        -->
         <appender-ref ref="debugFile"/>
         <appender-ref ref="infoFile"/>
         <appender-ref ref="warnFile"/>

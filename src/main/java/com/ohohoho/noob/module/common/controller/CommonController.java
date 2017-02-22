@@ -1,9 +1,12 @@
 package com.ohohoho.noob.module.common.controller;
 
 import com.earphone.aop.annotation.LogPoint;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ohohoho.noob.module.common.request.TestRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,7 +41,8 @@ public class CommonController implements ErrorController {
 
     @RequestMapping("/test")
     @LogPoint("test")
-    public Object test() throws Exception {
-        return "test";
+    public Object test(@RequestBody TestRequest request) throws Exception {
+        logger.info(new ObjectMapper().writeValueAsString(request));
+        return request;
     }
 }
