@@ -19,10 +19,6 @@
         <aspectj.version>1.8.7</aspectj.version>
         <cglib.version>3.1</cglib.version>
         <logstash.version>4.5.1</logstash.version>
-
-        <docker.maven.plugin.version>0.4.11</docker.maven.plugin.version>
-        <docker.image.prefix>earphone</docker.image.prefix>
-        <docker.base.image>java:8</docker.base.image>
     </properties>
 
     <dependencies>
@@ -91,32 +87,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.maven.plugin.version}</version>
-                <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <baseImage>${docker.base.image}</baseImage>
-                    <volumes>
-                        <volume>/tmp</volume>
-                    </volumes>
-                    <runs>
-                        <run>sh -c 'touch /${project.build.finalName}.jar'</run>
-                    </runs>
-                    <env>
-                        <JAVA_OPTS></JAVA_OPTS>
-                    </env>
-                    <entryPoint>[ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /${project.build.finalName}.jar" ]</entryPoint>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
             </plugin>
         </plugins>
     </build>
