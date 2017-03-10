@@ -17,8 +17,8 @@ import java.sql.SQLException;
  */
 @Configuration
 public class DruidDBConfig {
-    @Value("${spring.datasource.url-parameter}")
-    private String urlParameter;
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
     @Value("${spring.datasource.username}")
     private String username;
     @Value("${spring.datasource.password}")
@@ -59,10 +59,10 @@ public class DruidDBConfig {
     @Bean(value = "dataSource")
     public DataSource dataSource() throws SQLException {
         DruidDataSource datasource = new DruidDataSource();
-//        datasource.setUrl(this.urlParameter);
+//        datasource.setUrl(this.dbUrl);
 //        datasource.setUsername(username);
 //        datasource.setPassword(password);
-        datasource.setUrl(System.getenv("noob.mysql.url").concat("?").concat(urlParameter));
+        datasource.setUrl(System.getenv("noob.mysql.url"));
         datasource.setUsername(System.getenv("noob.mysql.username"));
         datasource.setPassword(System.getenv("noob.mysql.password"));
         datasource.setDriverClassName(driverClassName);
