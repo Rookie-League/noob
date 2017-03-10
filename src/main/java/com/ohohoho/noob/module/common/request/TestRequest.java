@@ -1,6 +1,7 @@
 package com.ohohoho.noob.module.common.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * @author YaoJiamin
@@ -8,10 +9,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @createDate 2017/2/21
  * @createTime 14:48
  */
+@JsonInclude(Include.NON_NULL)
 public class TestRequest {
 
-    @JsonProperty("json_field")
     private String jsonField;
+
+    public void setJson_field(String jsonField) {
+        this.jsonField = jsonField;
+    }
 
     public String getJsonField() {
         return jsonField;

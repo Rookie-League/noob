@@ -59,11 +59,12 @@ public class DruidDBConfig {
     @Bean(value = "dataSource")
     public DataSource dataSource() throws SQLException {
         DruidDataSource datasource = new DruidDataSource();
-        datasource.setUrl(this.dbUrl);
+//        datasource.setUrl(this.dbUrl);
 //        datasource.setUsername(username);
 //        datasource.setPassword(password);
-        datasource.setUsername(System.getenv("mysql.username"));
-        datasource.setPassword(System.getenv("mysql.password"));
+        datasource.setUrl(System.getenv("noob.mysql.url"));
+        datasource.setUsername(System.getenv("noob.mysql.username"));
+        datasource.setPassword(System.getenv("noob.mysql.password"));
         datasource.setDriverClassName(driverClassName);
         //configuration
         datasource.setInitialSize(initialSize);

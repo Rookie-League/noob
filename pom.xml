@@ -19,13 +19,20 @@
         <aspectj.version>1.8.7</aspectj.version>
         <cglib.version>3.1</cglib.version>
         <logstash.version>4.5.1</logstash.version>
+        <mapper.version>1.1.0</mapper.version>
+        <pagehelper.version>1.1.0</pagehelper.version>
+        <persistence.api.version>1.0</persistence.api.version>
+        <mybatis.spring.version>1.2.0</mybatis.spring.version>
+        <mybatis.typehandler.version>1.0.1</mybatis.typehandler.version>
+        <json.lib.version>2.4</json.lib.version>
+        <earphone.version>0.0.2-SNAPSHOT</earphone.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.littlearphone</groupId>
             <artifactId>common</artifactId>
-            <version>${project.version}</version>
+            <version>${earphone.version}</version>
         </dependency>
         <!--spring boot core-->
         <dependency>
@@ -52,6 +59,39 @@
         </dependency>
         <!-- end::tests[] -->
         <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+            <version>${mybatis.typehandler.version}</version>
+        </dependency>
+        <!--mapper-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${mapper.version}</version>
+        </dependency>
+        <!--pagehelper-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>${persistence.api.version}</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>${json.lib.version}</version>
+            <classifier>jdk15</classifier>
+        </dependency>-->
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
@@ -72,6 +112,20 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
+        <!--这个元素描述了项目相关的所有资源路径列表，例如和项目相关的属性文件，这些资源被包含在最终的打包文件里。-->
+        <resources>
+            <resource>
+                <!--描述存放资源的目录，该路径相对POM路径-->
+                <directory>src/main/java</directory>
+                <includes>
+                    <!--如果在源码路径有配置文件需要管理，一定要配置这个-->
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

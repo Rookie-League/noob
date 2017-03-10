@@ -2,14 +2,18 @@ package com.ohohoho.noob.module.common.controller;
 
 import com.earphone.aop.annotation.LogPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ohohoho.noob.constant.BasicDataCode;
 import com.ohohoho.noob.module.common.request.TestRequest;
+import com.ohohoho.noob.module.constant.service.ConstantService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +25,9 @@ public class CommonController implements ErrorController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final String PATH = "/error";
+
+    @Resource
+    private ConstantService constantService;
 
     @Override
     public String getErrorPath() {
@@ -41,8 +48,10 @@ public class CommonController implements ErrorController {
 
     @RequestMapping("/test")
     @LogPoint("test")
-    public Object test(@RequestBody TestRequest request) throws Exception {
+    public Object test(TestRequest request) throws Exception {
         logger.info(new ObjectMapper().writeValueAsString(request));
+        logger.info(JSONObject.fromObject(constantService.findByKey("666")).toString());
+        logger.info(JSONArray.fromObject(constantService.findHierarchy(BasicDataCode.TOP_ID)).toString());
         return request;
     }
 }

@@ -1,6 +1,6 @@
 package com.ohohoho.noob.config;
 
-import com.earphone.aop.aspect.LogAspect;
+import com.earphone.aop.aspect.ResultWrapAspect;
 import com.earphone.common.constant.Charset;
 import com.ohohoho.noob.interceptor.RequestLogInterceptor;
 import org.slf4j.Logger;
@@ -35,9 +35,9 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LogAspect logAspect() {
-        logger.info("####################Initial LogAspect####################");
-        return new LogAspect();
+    public ResultWrapAspect resultWrapAspect() {
+        logger.info("####################Initial ResultWrapAspect####################");
+        return new ResultWrapAspect();
     }
 
     @Bean

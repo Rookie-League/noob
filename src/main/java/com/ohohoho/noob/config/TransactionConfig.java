@@ -1,9 +1,5 @@
 package com.ohohoho.noob.config;
 
-import com.earphone.common.plugin.pagination.CacheInterceptor;
-import com.earphone.common.plugin.pagination.MybatisInterceptor;
-import com.earphone.common.plugin.pagination.PaginationInterceptor;
-import com.earphone.common.plugin.pagination.ResultSetInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -44,24 +40,8 @@ public class TransactionConfig {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
-        factoryBean.setMapperLocations(context.getResources("classpath*:/com/earphone/clone/module/**/*.xml"));
-        factoryBean.setPlugins(new Interceptor[]{cacheInterceptor(), paginationInterceptor(), resultSetInterceptor()});
+        factoryBean.setMapperLocations(context.getResources("classpath*:/com/ohohoho/noob/module/**/mapper/*.xml"));
         return factoryBean;
-    }
-
-    @Bean
-    public MybatisInterceptor cacheInterceptor() {
-        return new CacheInterceptor();
-    }
-
-    @Bean
-    public MybatisInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
-
-    @Bean
-    public MybatisInterceptor resultSetInterceptor() {
-        return new ResultSetInterceptor();
     }
 
     @Bean
