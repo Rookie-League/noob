@@ -62,9 +62,9 @@ public class DruidDBConfig {
 //        datasource.setUrl(this.dbUrl);
 //        datasource.setUsername(username);
 //        datasource.setPassword(password);
-        datasource.setUrl(System.getenv("noob.mysql.url").concat("?").concat(dbUrl));
-        datasource.setUsername(System.getenv("noob.mysql.username"));
-        datasource.setPassword(System.getenv("noob.mysql.password"));
+        datasource.setUrl(System.getenv("noob_mysql_url").concat("?").concat(dbUrl));
+        datasource.setUsername(System.getenv("noob_mysql_username"));
+        datasource.setPassword(System.getenv("noob_mysql_password"));
         datasource.setDriverClassName(driverClassName);
         //configuration
         datasource.setInitialSize(initialSize);
