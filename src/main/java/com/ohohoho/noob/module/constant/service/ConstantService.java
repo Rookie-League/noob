@@ -21,9 +21,9 @@ public class ConstantService {
         return constantMapper.selectOne(constant);
     }
 
-    public List<Constant> findHierarchy(Long hierarchy) {
+    public List<Constant> findChildrenByParentId(Long parentId) {
         Constant constant = new Constant();
-        constant.setParentId(hierarchy);
-        return PageHelper.startPage(1, 2).doSelectPage(() -> constantMapper.select(constant));
+        constant.setParentId(parentId);
+        return PageHelper.startPage(1, 1).doSelectPage(() -> constantMapper.select(constant));
     }
 }
