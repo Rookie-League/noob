@@ -4,7 +4,7 @@
     <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
     <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
-    <property name="LOG_HOME" value="logs/noob"/>
+    <property name="LOG_HOME" value="logs"/>
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
     <property name="CONSOLE_LOG_PATTERN" value="%boldGreen(%-5p) |-%d{HH:mm:ss.SSS}-| %boldBlue(%-22.22t)|-%boldMagenta(%c[%L]) %msg%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
     <property name="DEBUG_FILE_LOG_PATTERN" value="%boldCyan(%-5p) |-%d{HH:mm:ss.SSS}-| %boldCyan(%-22.22t)|-%boldMagenta(%c[%L]) %msg%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
