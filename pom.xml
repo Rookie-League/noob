@@ -129,8 +129,6 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-
-
     </dependencies>
 
     <build>

@@ -1,4 +1,4 @@
-package com.ohohoho.noob.module.constant.domain;
+package com.ohohoho.noob.module.authority.domain;
 
 /**
  * Created by thythm on 2017/3/16.
@@ -15,10 +15,10 @@ public class Account {
     public void setId(Integer id) {
         this.id = id;
     }
-    public java.lang.String getUsername() {
+    public String getUsername() {
         return username;
     }
-    public void setUsername(java.lang.String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
     public String getPassword() {

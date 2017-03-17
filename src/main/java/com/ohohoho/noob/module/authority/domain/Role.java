@@ -1,4 +1,4 @@
-package com.ohohoho.noob.module.constant.domain;
+package com.ohohoho.noob.module.authority.domain;
 
 /**
  * Created by thythm on 2017/3/16.

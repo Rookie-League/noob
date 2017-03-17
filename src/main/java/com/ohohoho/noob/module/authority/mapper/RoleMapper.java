@@ -1,6 +1,6 @@
-package com.ohohoho.noob.module.constant.mapper;
+package com.ohohoho.noob.module.authority.mapper;
 
-import com.ohohoho.noob.module.constant.domain.Role;
+import com.ohohoho.noob.module.authority.domain.Role;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;

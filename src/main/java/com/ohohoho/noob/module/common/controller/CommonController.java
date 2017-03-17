@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping
 public class CommonController implements ErrorController {
+    private static final int FORBIDDEN = 403;
     private static final int NOT_FOUND = 404;
     private static final int INTERNAL_SERVER_ERROR = 500;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,6 +37,9 @@ public class CommonController implements ErrorController {
     @RequestMapping(PATH)
     public void error(HttpServletRequest request, HttpServletResponse response) throws Exception {
         switch (response.getStatus()) {
+            case FORBIDDEN:
+                request.getRequestDispatcher("/403.html").forward(request, response);
+                break;
             case NOT_FOUND:
                 request.getRequestDispatcher("/404.html").forward(request, response);
                 break;

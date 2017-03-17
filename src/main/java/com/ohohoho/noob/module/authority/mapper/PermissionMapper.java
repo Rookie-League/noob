@@ -1,6 +1,6 @@
-package com.ohohoho.noob.module.constant.mapper;
+package com.ohohoho.noob.module.authority.mapper;
 
-import com.ohohoho.noob.module.constant.domain.Permission;
+import com.ohohoho.noob.module.authority.domain.Permission;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
