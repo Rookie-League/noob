@@ -1,4 +1,4 @@
-package com.ohohoho.noob.module.authority.domain;
+package com.ohohoho.noob.module.constant.domain;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -8,10 +8,17 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
- * ClassName: Constant
+ * ClassName: InsertNewConstant
  */
 @Table(name = "constant")
-public class Constant {
+public class FindConstantByParentId {
+    public FindConstantByParentId() {
+    }
+
+    public FindConstantByParentId(Long parentId) {
+        setParentId(parentId);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

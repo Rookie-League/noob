@@ -8,10 +8,17 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
- * ClassName: Constant
+ * ClassName: InsertNewConstant
  */
 @Table(name = "constant")
-public class Constant {
+public class FindConstantByKey {
+    public FindConstantByKey() {
+    }
+
+    public FindConstantByKey(String key) {
+        setKey(key);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

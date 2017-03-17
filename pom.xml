@@ -27,6 +27,7 @@
         <json.lib.version>2.4</json.lib.version>
         <earphone.version>0.0.2-SNAPSHOT</earphone.version>
         <shiro.version>1.2.2</shiro.version>
+        <testng.version>6.8.5</testng.version>
     </properties>
 
     <dependencies>
@@ -106,7 +107,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8.5</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

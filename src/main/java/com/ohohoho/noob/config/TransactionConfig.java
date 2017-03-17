@@ -4,12 +4,9 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
@@ -23,9 +20,9 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.ohohoho"}, includeFilters = {
-        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Service.class})
-})
+//@ComponentScan(basePackages = {"com.ohohoho"}, includeFilters = {
+//        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Service.class})
+//})
 @MapperScan({
         "com.ohohoho.noob.module.**.mapper"
 })

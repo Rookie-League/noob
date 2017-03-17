@@ -1,8 +1,11 @@
 package com.ohohoho.noob.module.constant.service;
 
-import com.github.pagehelper.PageHelper;
-import com.ohohoho.noob.module.constant.domain.Constant;
-import com.ohohoho.noob.module.constant.mapper.ConstantMapper;
+import com.ohohoho.noob.module.constant.domain.FindConstantByKey;
+import com.ohohoho.noob.module.constant.domain.FindConstantByParentId;
+import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
+import com.ohohoho.noob.module.constant.mapper.FindConstantByKeyMapper;
+import com.ohohoho.noob.module.constant.mapper.FindConstantByParentIdMapper;
+import com.ohohoho.noob.module.constant.mapper.InsertNewConstantMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,17 +16,22 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ConstantService {
     @Resource
-    private ConstantMapper constantMapper;
+    private InsertNewConstantMapper insertNewConstantMapper;
+    @Resource
+    private FindConstantByKeyMapper findConstantByKeyMapper;
+    @Resource
+    private FindConstantByParentIdMapper findConstantByParentIdMapper;
 
-    public Constant findByKey(String key) {
-        Constant constant = new Constant();
-        constant.setKey(key);
-        return constantMapper.selectOne(constant);
+    @Transactional
+    public int insert(InsertNewConstant constant) {
+        return insertNewConstantMapper.insertSelective(constant);
     }
 
-    public List<Constant> findChildrenByParentId(Long parentId) {
-        Constant constant = new Constant();
-        constant.setParentId(parentId);
-        return PageHelper.startPage(1, 1).doSelectPage(() -> constantMapper.select(constant));
+    public FindConstantByKey findByKey(String key) {
+        return findConstantByKeyMapper.selectOne(new FindConstantByKey(key));
+    }
+
+    public List<FindConstantByParentId> findChildrenByParentId(Long parentId) {
+        return findConstantByParentIdMapper.select(new FindConstantByParentId(parentId));
     }
 }
