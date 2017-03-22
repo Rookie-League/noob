@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
  * ClassName: InsertNewConstant
  */
 @Table(name = "constant")
-public class FindConstantByParentId {
-    public FindConstantByParentId() {
+public class ConstantChild {
+    public ConstantChild() {
     }
 
-    public FindConstantByParentId(Long parentId) {
+    public ConstantChild(Long parentId) {
         setParentId(parentId);
     }
 

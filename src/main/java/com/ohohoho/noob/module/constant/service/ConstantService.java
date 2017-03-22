@@ -1,7 +1,8 @@
 package com.ohohoho.noob.module.constant.service;
 
+import com.ohohoho.noob.module.constant.domain.ConstantParentId;
 import com.ohohoho.noob.module.constant.domain.FindConstantByKey;
-import com.ohohoho.noob.module.constant.domain.FindConstantByParentId;
+import com.ohohoho.noob.module.constant.domain.ConstantChild;
 import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
 import com.ohohoho.noob.module.constant.mapper.FindConstantByKeyMapper;
 import com.ohohoho.noob.module.constant.mapper.FindConstantByParentIdMapper;
@@ -31,7 +32,7 @@ public class ConstantService {
         return findConstantByKeyMapper.selectOne(new FindConstantByKey(key));
     }
 
-    public List<FindConstantByParentId> findChildrenByParentId(Long parentId) {
-        return findConstantByParentIdMapper.select(new FindConstantByParentId(parentId));
+    public List<ConstantChild> findChildrenByParentId(Long parentId) {
+        return findConstantByParentIdMapper.select(new ConstantParentId(parentId));
     }
 }

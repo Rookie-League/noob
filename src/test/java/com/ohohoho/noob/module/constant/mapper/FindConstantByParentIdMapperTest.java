@@ -6,7 +6,8 @@ import com.github.pagehelper.PageHelper;
 import com.ohohoho.noob.config.DruidDBConfig;
 import com.ohohoho.noob.config.TransactionConfig;
 import com.ohohoho.noob.constant.BasicDataCode;
-import com.ohohoho.noob.module.constant.domain.FindConstantByParentId;
+import com.ohohoho.noob.module.constant.domain.ConstantChild;
+import com.ohohoho.noob.module.constant.domain.ConstantParentId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringBootConfiguration;
@@ -37,8 +38,8 @@ public class FindConstantByParentIdMapperTest extends AbstractTestNGSpringContex
 
     @Test
     public void test() {
-        ISelect select = () -> mapper.select(new FindConstantByParentId(BasicDataCode.TOP_ID));
-        List<FindConstantByParentId> list = PageHelper.startPage(1, 1).doSelectPage(select);
+        ISelect select = () -> mapper.select(new ConstantParentId(BasicDataCode.TOP_ID));
+        List<ConstantChild> list = PageHelper.startPage(1, 1).doSelectPage(select);
         LOGGER.info(JSONUtils.toJSON(list));
     }
 }
