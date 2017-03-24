@@ -27,7 +27,7 @@ import java.util.List;
  */
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan( basePackages = {"com.ohohoho.noob.module.authority.service"})
 @ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
 public class JustTest  extends AbstractTestNGSpringContextTests {
 
@@ -36,9 +36,7 @@ public class JustTest  extends AbstractTestNGSpringContextTests {
     @Resource
     private AccountService accountService;
     @Resource
-    private AccountMapper accountMapper;
-    @Resource
-    private RoleMapper roleMapper;
+    private RoleService roleService;
 
     @Test
     public void testInsert() {
@@ -47,7 +45,7 @@ public class JustTest  extends AbstractTestNGSpringContextTests {
         account.setUsername("xiaoma");
         account.setPassword("123456");
 
-        accountMapper.insert(account);
+        accountService.insert(account);
 
         LOGGER.info(JSONUtils.toJSON(account));
     }
@@ -55,11 +53,11 @@ public class JustTest  extends AbstractTestNGSpringContextTests {
     @Test
     public void testGetRoleName() {
 
-        List<Role> roleList = accountMapper.getRoleListbyId(1);
+        List<Role> roleList = accountService.getRoleListbyId(1);
 
         for (Role role : roleList) {
 
-            LOGGER.info( "boom=====" + JSONUtils.toJSON(roleMapper.getPermissionsNameByRoleId(role.getId())));
+            LOGGER.info( "boom=====" + JSONUtils.toJSON(roleService.getPermissionsNameByRoleId(role.getId())));
 
         }
 

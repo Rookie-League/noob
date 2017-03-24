@@ -6,6 +6,7 @@ import com.ohohoho.noob.module.authority.mapper.AccountMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import java.util.Set;
 @Transactional(readOnly = true)
 public class AccountService {
 
+    @Resource
     private AccountMapper accountMapper;
 
     public Account findByUsername(String username){

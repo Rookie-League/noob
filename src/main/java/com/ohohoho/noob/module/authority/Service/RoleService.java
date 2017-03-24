@@ -4,6 +4,7 @@ import com.ohohoho.noob.module.authority.mapper.RoleMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class RoleService {
 
+    @Resource
     private RoleMapper roleMapper;
 
     public List<String> getPermissionsNameByRoleId(Integer roleId){
