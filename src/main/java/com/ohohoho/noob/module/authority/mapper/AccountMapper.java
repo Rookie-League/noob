@@ -10,11 +10,12 @@ import java.util.Set;
 /**
  * Created by thythm on 2017/3/16.
  */
-public interface AccountMapper extends Mapper<Account>{
+public interface AccountMapper {
 
    Account findByUsername(String username);
-   Set<String> getRolesNamebyId(Integer id);
+
+   void insert(Account accout);
+
    List<Role> getRoleListbyId(Integer id);
-   List<Account> getList();
 
 }
