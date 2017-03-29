@@ -1,11 +1,13 @@
 package com.ohohoho.noob.security;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.ohohoho.noob.module.authority.Service.AccountService;
+import com.ohohoho.noob.module.authority.Service.RoleService;
 import com.ohohoho.noob.module.authority.domain.Account;
 import com.ohohoho.noob.module.authority.domain.Role;
-import com.ohohoho.noob.module.authority.mapper.AccountMapper;
-import com.ohohoho.noob.module.authority.mapper.RoleMapper;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,9 +32,9 @@ public class MyShiroRealm extends AuthorizingRealm {
     private static final Logger logger = LoggerFactory.getLogger(MyShiroRealm.class);
 
     @Resource
-    private AccountMapper accountMapper;
+    private AccountService accountService;
     @Resource
-    private RoleMapper roleMapper;
+    private RoleService roleService;
 
     /**
      * 权限认证，为当前登录的Subject授予角色和权限
@@ -47,17 +49,19 @@ public class MyShiroRealm extends AuthorizingRealm {
         //获取当前登录输入的用户名，等价于(String) principalCollection.fromRealm(getName()).iterator().next();
         String loginName = (String) super.getAvailablePrincipal(principalCollection);
         //到数据库查是否有此对象
-        Account account = accountMapper.findByUsername(loginName);// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
+        Account account = accountService.findByUsername(loginName);// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         if (account != null) {
             //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             //用户的角色集合
-            info.setRoles(accountMapper.getRolesNamebyId(account.getId()));
+            Set<String> roles = new HashSet<>();
+            List<Role> roleList = accountService.getRoleListbyId(account.getId());
             //用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要
-            List<Role> roleList = accountMapper.getRoleListbyId(account.getId());
             for (Role role : roleList) {
-                info.addStringPermissions(roleMapper.getPermissionsNameById(role.getId()));
+                roles.add(role.getRoleName());
+                info.addStringPermissions(roleService.getPermissionsNameByRoleId(role.getId()));
             }
+            info.setRoles(roles);
             // 或者按下面这样添加
             //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
 //            simpleAuthorInfo.addRole("admin");
@@ -81,7 +85,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         logger.info("验证当前Subject时获取到token为：{}", ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
 
         //查出是否有此用户
-        Account account = accountMapper.findByUsername(token.getUsername());
+        Account account = accountService.findByUsername(token.getUsername());
         if (account != null) {
             // 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
             return new SimpleAuthenticationInfo(account.getUsername(), account.getPassword(), getName());

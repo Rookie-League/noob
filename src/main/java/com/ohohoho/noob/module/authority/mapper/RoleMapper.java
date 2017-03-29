@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface RoleMapper extends Mapper<Role>{
 
-
-    List<String> getPermissionsNameById(Integer id);
+    List<String> getPermissionsNameByRoleId(Integer roleId);
 
 }

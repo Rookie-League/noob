@@ -3,6 +3,7 @@ package com.ohohoho.noob.module.authority.controller;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import com.ohohoho.noob.module.authority.Service.AccountService;
 import com.ohohoho.noob.module.authority.domain.Account;
 import com.ohohoho.noob.module.authority.mapper.AccountMapper;
 import org.apache.shiro.SecurityUtils;
@@ -20,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -35,7 +37,24 @@ public class AuthorizeController {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizeController.class);
 
     @Resource
-    private AccountMapper accountMapper;
+    private AccountService accountService;
+
+
+    @RequestMapping( value = "/register", method = RequestMethod.POST )
+    @ResponseBody
+    public String register(@Valid Account account) {
+        try {
+            String username = account.getUsername();
+            String password = account.getPassword();
+            System.out.println(username);
+//            accountService.insert(account);
+//            System.out.println(account.getId());
+        } catch (Exception e) {
+            return "fail to regisetr";
+        }
+        return "congratulations";
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(Model model) {

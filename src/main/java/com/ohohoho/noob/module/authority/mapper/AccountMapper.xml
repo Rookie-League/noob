@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohohoho.noob.module.authority.mapper.AccountMapper">
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <select id="findByUsername" resultType="com.ohohoho.noob.module.authority.domain.Account">
+        select * from account where username = #{username};
+    </select>
+
+    <select id="getRoleListbyId" resultType="com.ohohoho.noob.module.authority.domain.Role">
+        SELECT
+            c.*
+        FROM
+            account a
+        LEFT JOIN shiro_user_role b ON a.id = b.user_id
+        LEFT JOIN shiro_role c ON b.role_id = c.id
+        WHERE
+            a.id = #{id};
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into account (
+          username,
+          password)
+        values (
+          #{username},
+          #{password}
+        );
+    </insert>
+
+</mapper>
