@@ -28,12 +28,23 @@
         <earphone.version>0.0.2-SNAPSHOT</earphone.version>
         <shiro.version>1.2.2</shiro.version>
         <testng.version>6.8.5</testng.version>
+        <jacoco.version>0.7.9</jacoco.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.littlearphone</groupId>
             <artifactId>common</artifactId>
+            <version>${earphone.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.littlearphone</groupId>
+            <artifactId>schedule</artifactId>
+            <version>${earphone.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.littlearphone</groupId>
+            <artifactId>wrapper</artifactId>
             <version>${earphone.version}</version>
         </dependency>
         <!--spring boot core-->
@@ -93,6 +104,11 @@
             <version>${json.lib.version}</version>
             <classifier>jdk15</classifier>
         </dependency>-->
+        <!-- db dependencies -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -160,6 +176,26 @@
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>pre-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>

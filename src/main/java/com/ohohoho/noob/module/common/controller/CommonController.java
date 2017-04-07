@@ -1,7 +1,7 @@
 package com.ohohoho.noob.module.common.controller;
 
-import com.earphone.aop.annotation.LogPoint;
-import com.earphone.utility.utils.JSONUtils;
+import com.earphone.common.utils.JSONUtils;
+import com.earphone.wrapper.annotation.LogPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohohoho.noob.constant.BasicDataCode;
 import com.ohohoho.noob.module.common.request.TestRequest;

@@ -1,4 +1,4 @@
-package com.ohohoho.noob.module.authority.Service;
+package com.ohohoho.noob.module.authority.service;
 
 import com.ohohoho.noob.module.authority.domain.Account;
 import com.ohohoho.noob.module.authority.domain.Role;
@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author majunjie

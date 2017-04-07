@@ -1,6 +1,5 @@
 package com.ohohoho.noob.module.constant.service;
 
-import com.ohohoho.noob.module.constant.domain.ConstantParentId;
 import com.ohohoho.noob.module.constant.domain.FindConstantByKey;
 import com.ohohoho.noob.module.constant.domain.ConstantChild;
 import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
@@ -14,7 +13,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 public class ConstantService {
     @Resource
     private InsertNewConstantMapper insertNewConstantMapper;
@@ -33,6 +31,6 @@ public class ConstantService {
     }
 
     public List<ConstantChild> findChildrenByParentId(Long parentId) {
-        return findConstantByParentIdMapper.select(new ConstantParentId(parentId));
+        return findConstantByParentIdMapper.select(new ConstantChild(parentId));
     }
 }

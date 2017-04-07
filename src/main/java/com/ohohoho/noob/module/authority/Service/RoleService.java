@@ -1,4 +1,4 @@
-package com.ohohoho.noob.module.authority.Service;
+package com.ohohoho.noob.module.authority.service;
 
 import com.ohohoho.noob.module.authority.mapper.RoleMapper;
 import org.springframework.stereotype.Service;

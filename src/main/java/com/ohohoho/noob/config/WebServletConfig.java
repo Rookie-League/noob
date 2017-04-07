@@ -1,7 +1,7 @@
 package com.ohohoho.noob.config;
 
-import com.earphone.aop.aspect.ResultWrapAspect;
 import com.earphone.common.constant.Charset;
+import com.earphone.wrapper.aspect.ResultWrapAspect;
 import com.ohohoho.noob.interceptor.RequestLogInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public FilterRegistrationBean characterEncodingFilter() {
+    public FilterRegistrationBean filterRegistrationBean() {
         logger.info("####################Initial CharacterEncodingFilter####################");
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new CharacterEncodingFilter(Charset.UTF_8.getCharset(), true));
