@@ -12,10 +12,10 @@
         <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
         <!--具体配置详见：https://logback.qos.ch/manual/layouts.html-->
         <!--如果表达式中没有堆栈输出信息格式化字符，PatternLayout的安全机制会静默追加一个%xThrowable，要避免这种情况，需要使用%nopex-->
-        <property name="DEBUG_FILE_LOG_PATTERN" value="%boldCyan(%-5p) |-%d{HH:mm:ss.SSS}-| %boldCyan(%-22.22t)|-%boldMagenta(%c[%L]) %msg%n %ex"/>
-        <property name="INFO_FILE_LOG_PATTERN" value="%boldBlue(%-5p) |-%d{HH:mm:ss.SSS}-| %boldBlue(%-22.22t)|-%boldMagenta(%c[%L]) %msg%n %ex"/>
-        <property name="WARN_FILE_LOG_PATTERN" value="%boldYellow(%-5p) |-%d{HH:mm:ss.SSS}-| %boldYellow(%-22.22t)|-%boldMagenta(%c[%L]) %msg%n %ex"/>
-        <property name="ERROR_FILE_LOG_PATTERN" value="%boldRed(%-5p) |-%d{HH:mm:ss.SSS}-| %boldRed(%-22.22t)|-%boldMagenta(%c[%L]) %boldRed(%msg%n %ex) %nopex"/>
+        <property name="DEBUG_FILE_LOG_PATTERN" value="%boldCyan(%-5p) |-%d{HH:mm:ss.SSS}-|-%boldMagenta(%c[%L])-[%boldCyan(%t)]| %msg%n %ex"/>
+        <property name="INFO_FILE_LOG_PATTERN" value="%boldBlue(%-5p) |-%d{HH:mm:ss.SSS}-|-%boldMagenta(%c[%L])-[%boldBlue(%t)]| %msg%n %ex"/>
+        <property name="WARN_FILE_LOG_PATTERN" value="%boldYellow(%-5p) |-%d{HH:mm:ss.SSS}-|-%boldMagenta(%c[%L])-[%boldYellow(%t)]| %msg%n %ex"/>
+        <property name="ERROR_FILE_LOG_PATTERN" value="%boldRed(%-5p) |-%d{HH:mm:ss.SSS}-|-%boldMagenta(%c[%L])-[%boldRed(%t)]| %boldRed(%msg%n %ex) %nopex"/>
         <!-- 控制台输出 -->
         <appender name="STDOUT_DEBUG" class="ch.qos.logback.core.ConsoleAppender">
             <!-- 日志输出编码 -->
