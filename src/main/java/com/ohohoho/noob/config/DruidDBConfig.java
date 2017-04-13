@@ -59,10 +59,10 @@ public class DruidDBConfig {
     @Bean(value = "dataSource")
     public DataSource dataSource() throws SQLException {
         StringBuilder url = new StringBuilder("jdbc:mysql://");
-        url.append(System.getenv("noob.mysql.host"));
-        url.append(System.getenv("noob.mysql.port"));
-        url.append(System.getenv("noob.mysql.db"));
-        url.append("?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round");
+        url.append(System.getenv("noob.mysql.host")).append(":");
+        url.append(System.getenv("noob.mysql.port")).append("/");
+        url.append(System.getenv("noob.mysql.db")).append("?");
+        url.append("useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round");
         DruidDataSource datasource = new DruidDataSource();
 //        datasource.setUrl(this.dbUrl);
 //        datasource.setUsername(username);
