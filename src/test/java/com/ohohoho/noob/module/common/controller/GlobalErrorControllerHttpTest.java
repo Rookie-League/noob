@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import static org.testng.Assert.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CommonControllerHttpTest extends AbstractTestNGSpringContextTests {
+public class GlobalErrorControllerHttpTest extends AbstractTestNGSpringContextTests {
 
     @Resource
     private TestRestTemplate template;

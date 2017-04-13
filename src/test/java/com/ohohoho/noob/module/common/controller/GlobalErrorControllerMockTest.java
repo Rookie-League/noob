@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CommonControllerMockTest extends AbstractTestNGSpringContextTests {
+public class GlobalErrorControllerMockTest extends AbstractTestNGSpringContextTests {
 
     @Resource
     private MockMvc mvc;
