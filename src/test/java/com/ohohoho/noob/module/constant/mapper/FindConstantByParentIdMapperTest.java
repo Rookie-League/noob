@@ -28,7 +28,7 @@ import java.util.List;
  */
 //@SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan(basePackages = {"com.ohohoho.noob.module.constant.mapper"})
 @ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
 public class FindConstantByParentIdMapperTest extends AbstractTestNGSpringContextTests {
     private static final Logger LOGGER = LoggerFactory.getLogger(FindConstantByParentIdMapperTest.class);

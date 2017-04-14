@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  */
 //@SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan(basePackages = {"com.ohohoho.noob.module.constant.mapper"})
 @ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
 public class FindConstantByKeyMapperTest extends AbstractTestNGSpringContextTests {
     private static final Logger LOGGER = LoggerFactory.getLogger(FindConstantByKeyMapperTest.class);
