@@ -3,7 +3,7 @@ package com.ohohoho.noob.module.constant.mapper;
 import com.earphone.common.utils.JSONUtils;
 import com.ohohoho.noob.config.DruidDBConfig;
 import com.ohohoho.noob.config.TransactionConfig;
-import com.ohohoho.noob.constant.BasicDataCode;
+import com.ohohoho.noob.constant.ProjectConstant;
 import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class InserNewConstantMapperTest extends AbstractTransactionalTestNGSprin
         InsertNewConstant constant = new InsertNewConstant();
         constant.setKey("ahahaha");
         constant.setValue("yoyoyo");
-        constant.setParentId(BasicDataCode.TOP_ID);
+        constant.setParentId(ProjectConstant.TOP_ID);
         constant.setOperUser("test");
         LOGGER.info(JSONUtils.toJSON(mapper.insertSelective(constant)));
     }

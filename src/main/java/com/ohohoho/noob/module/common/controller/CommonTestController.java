@@ -3,7 +3,7 @@ package com.ohohoho.noob.module.common.controller;
 import com.earphone.common.utils.JSONUtils;
 import com.earphone.wrapper.annotation.LogPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ohohoho.noob.constant.BasicDataCode;
+import com.ohohoho.noob.constant.ProjectConstant;
 import com.ohohoho.noob.module.common.request.TestRequest;
 import com.ohohoho.noob.module.constant.service.ConstantService;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class CommonTestController {
     public Object test(TestRequest request) throws Exception {
         logger.info(new ObjectMapper().writeValueAsString(request));
         logger.info(JSONUtils.toJSON(constantService.findByKey("666")));
-        logger.info(JSONUtils.toJSON(constantService.findChildrenByParentId(BasicDataCode.TOP_ID)));
+        logger.info(JSONUtils.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
         return request;
     }
 

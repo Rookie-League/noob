@@ -3,7 +3,7 @@ package com.ohohoho.noob.module.constant.service;
 import com.earphone.common.utils.JSONUtils;
 import com.ohohoho.noob.config.DruidDBConfig;
 import com.ohohoho.noob.config.TransactionConfig;
-import com.ohohoho.noob.constant.BasicDataCode;
+import com.ohohoho.noob.constant.ProjectConstant;
 import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class ConstantServiceTest extends AbstractTransactionalTestNGSpringContex
         InsertNewConstant constant = new InsertNewConstant();
         constant.setKey(key);
         constant.setValue("yoyoyo");
-        constant.setParentId(BasicDataCode.TOP_ID);
+        constant.setParentId(ProjectConstant.TOP_ID);
         constant.setOperUser("test");
         Assert.assertEquals(constantService.insert(constant), 1);
     }
@@ -55,7 +55,7 @@ public class ConstantServiceTest extends AbstractTransactionalTestNGSpringContex
 
     @Test(dependsOnMethods = "testInsert")
     public void testFindChildrenByParentId() throws Exception {
-        logger.info(JSONUtils.toJSON(constantService.findChildrenByParentId(BasicDataCode.TOP_ID)));
+        logger.info(JSONUtils.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
     }
 
 }
