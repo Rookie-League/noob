@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java:alpine
 ADD noob.jar noob.jar
 RUN sh -c 'touch /noob.jar'
 EXPOSE 8888
