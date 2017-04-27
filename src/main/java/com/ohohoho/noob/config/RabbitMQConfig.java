@@ -3,6 +3,7 @@ package com.ohohoho.noob.config;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory.CacheMode;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -43,6 +44,7 @@ public class RabbitMQConfig {
     @Bean
     public CachingConnectionFactory rabbitConnectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+        connectionFactory.setCacheMode(CacheMode.CONNECTION);
         connectionFactory.setHost(System.getenv("noob.rabbitmq.host"));
         connectionFactory.setPort(Integer.valueOf(System.getenv("noob.rabbitmq.port")));
         connectionFactory.setUsername(System.getenv("noob.rabbitmq.username"));
