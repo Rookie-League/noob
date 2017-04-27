@@ -22,7 +22,7 @@ import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_CONTAINE
 @Component
 public class RabbitMQConsumer {
 
-//当消费者和生产者分离时可用，否则可能会无法自动创建队列和交换器
+//当消费者和生产者分离时可用，生产者单元测试会无法自动创建队列
 //    @RabbitListener(containerFactory = NOOB_RABBIT_DEMO_CONTAINER_FACTORY,
 //            bindings = @QueueBinding(
 //                    value = @Queue(

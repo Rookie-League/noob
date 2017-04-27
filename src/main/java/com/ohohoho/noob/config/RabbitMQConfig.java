@@ -1,5 +1,6 @@
 package com.ohohoho.noob.config;
 
+import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -9,6 +10,7 @@ import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFacto
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory.CacheMode;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,15 @@ import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_ROUTE_KE
 @Configuration
 @EnableRabbit
 public class RabbitMQConfig {
+
+    @Bean
+    public AmqpAdmin amqpAdmin() {
+        AmqpAdmin amqpAdmin = new RabbitAdmin(rabbitConnectionFactory());
+        amqpAdmin.declareQueue(rabbitDemoQueue());
+        amqpAdmin.declareExchange(rabbitDemoExchange());
+        amqpAdmin.declareBinding(demoRabbitBinding());
+        return amqpAdmin;
+    }
 
     @Bean
     public Queue rabbitDemoQueue() {
