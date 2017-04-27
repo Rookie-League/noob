@@ -1,4 +1,4 @@
-FROM java:alpine
+FROM openjdk:8-jdk-alpine
 ADD noob.jar noob.jar
 RUN sh -c 'touch /noob.jar'
 EXPOSE 8888
