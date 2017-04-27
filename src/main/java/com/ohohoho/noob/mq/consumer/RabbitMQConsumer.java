@@ -22,17 +22,19 @@ import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_CONTAINE
 @Component
 public class RabbitMQConsumer {
 
-    @RabbitListener(containerFactory = NOOB_RABBIT_DEMO_CONTAINER_FACTORY,
-            bindings = @QueueBinding(
-                    value = @Queue(
-                            value = NOOB_RABBIT_DEMO_QUEUE,
-                            durable = "true"),
-                    exchange = @Exchange(
-                            value = NOOB_RABBIT_DEMO_EXCHANGE,
-                            ignoreDeclarationExceptions = "true",
-                            delayed = "true"),
-                    key = NOOB_RABBIT_DEMO_ROUTE_KEY)
-    )
+//当消费者和生产者分离时可用，生产者单元测试会无法自动创建队列
+//    @RabbitListener(containerFactory = NOOB_RABBIT_DEMO_CONTAINER_FACTORY,
+//            bindings = @QueueBinding(
+//                    value = @Queue(
+//                            value = NOOB_RABBIT_DEMO_QUEUE,
+//                            durable = "true"),
+//                    exchange = @Exchange(
+//                            value = NOOB_RABBIT_DEMO_EXCHANGE,
+//                            ignoreDeclarationExceptions = "true",
+//                            delayed = "true"),
+//                    key = NOOB_RABBIT_DEMO_ROUTE_KEY)
+//    )
+    @RabbitListener(queues = NOOB_RABBIT_DEMO_QUEUE, containerFactory = NOOB_RABBIT_DEMO_CONTAINER_FACTORY)
     public void receiveDelayMessage(@Payload JSONMessage content) {
         System.out.println(content);
     }

@@ -1,5 +1,9 @@
 package com.ohohoho.noob.config;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -10,6 +14,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_CONTAINER_FACTORY;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_EXCHANGE;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_QUEUE;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_ROUTE_KEY;
 
 /**
  * @author YaoJiamin
@@ -20,6 +27,23 @@ import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_CONTAINE
 @Configuration
 @EnableRabbit
 public class RabbitMQConfig {
+
+    @Bean
+    public Queue rabbitDemoQueue() {
+        return new Queue(NOOB_RABBIT_DEMO_QUEUE);
+    }
+
+    @Bean
+    public DirectExchange rabbitDemoExchange() {
+        DirectExchange exchange = new DirectExchange(NOOB_RABBIT_DEMO_EXCHANGE);
+        exchange.setDelayed(true);
+        return exchange;
+    }
+
+    @Bean
+    public Binding demoRabbitBinding() {
+        return BindingBuilder.bind(rabbitDemoQueue()).to(rabbitDemoExchange()).with(NOOB_RABBIT_DEMO_ROUTE_KEY);
+    }
 
     //This component is declaration for producer
     @Bean
