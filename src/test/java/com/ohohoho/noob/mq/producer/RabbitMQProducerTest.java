@@ -31,15 +31,10 @@ public class RabbitMQProducerTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testSendDelayMessage() throws Exception {
-        rabbitMQProducer.sendDelayMessage("RabbitMQ=666666666", 1000);
-    }
-
-    @Test
-    public void testSendJSONMessage() throws Exception {
         JSONMessage message = new JSONMessage();
         message.setKey("RabbitMQ");
         message.setValue("66666666666");
-        rabbitMQProducer.sendJSONMessage(message, 1000);
+        rabbitMQProducer.sendDelayMessage(message, 10000);
     }
 
 }

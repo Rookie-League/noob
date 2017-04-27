@@ -1,13 +1,17 @@
 package com.ohohoho.noob.mq.consumer;
 
 import com.ohohoho.noob.mq.message.JSONMessage;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DELAY_QUEUE;
-import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_JSON_CONTAINER_FACTORY;
-import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_JSON_QUEUE;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_EXCHANGE;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_QUEUE;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_ROUTE_KEY;
+import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_CONTAINER_FACTORY;
 
 /**
  * @author YaoJiamin
@@ -18,13 +22,18 @@ import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_JSON_QUEUE;
 @Component
 public class RabbitMQConsumer {
 
-    @RabbitListener(queues = NOOB_RABBIT_DELAY_QUEUE)
-    public void receiveDelayMessage(@Payload String content) {
-        System.out.println(content);
-    }
-
-    @RabbitListener(queues = NOOB_RABBIT_JSON_QUEUE, containerFactory = NOOB_RABBIT_JSON_CONTAINER_FACTORY)
-    public void receiveJSONMessage(@Payload JSONMessage content) {
+    @RabbitListener(containerFactory = NOOB_RABBIT_DEMO_CONTAINER_FACTORY,
+            bindings = @QueueBinding(
+                    value = @Queue(
+                            value = NOOB_RABBIT_DEMO_QUEUE,
+                            durable = "true"),
+                    exchange = @Exchange(
+                            value = NOOB_RABBIT_DEMO_EXCHANGE,
+                            ignoreDeclarationExceptions = "true",
+                            delayed = "true"),
+                    key = NOOB_RABBIT_DEMO_ROUTE_KEY)
+    )
+    public void receiveDelayMessage(@Payload JSONMessage content) {
         System.out.println(content);
     }
 
