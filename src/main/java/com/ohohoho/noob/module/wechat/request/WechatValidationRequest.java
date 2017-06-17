@@ -55,6 +55,6 @@ public class WechatValidationRequest {
     }
 
     public Boolean validate() {
-        return StringUtils.isBlank(signature) || StringUtils.isBlank(nonce) || StringUtils.isBlank(timestamp) ? Boolean.FALSE : Boolean.TRUE;
+        return (StringUtils.isBlank(signature) || StringUtils.isBlank(nonce) || StringUtils.isBlank(timestamp)) ? Boolean.FALSE : Boolean.TRUE;
     }
 }
