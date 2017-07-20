@@ -1,6 +1,6 @@
 package com.ohohoho.noob.module.constant.mapper;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 import com.ohohoho.noob.config.DruidDBConfig;
 import com.ohohoho.noob.config.TransactionConfig;
 import com.ohohoho.noob.module.constant.domain.FindConstantByKey;
@@ -32,6 +32,6 @@ public class FindConstantByKeyMapperTest extends AbstractTestNGSpringContextTest
 
     @Test
     public void test() {
-        LOGGER.info(JSONUtils.toJSON(mapper.selectOne(new FindConstantByKey("666"))));
+        LOGGER.info(JSONExtend.toJSON(mapper.selectOne(new FindConstantByKey("666"))));
     }
 }

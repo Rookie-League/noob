@@ -1,6 +1,6 @@
 package com.ohohoho.noob.interceptor;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,7 +22,7 @@ public class RequestLogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        logger.info("STATUS={}#URI={}#ARGUMENTS={}", response.getStatus(), getRequestURI(request), JSONUtils.toJSON(request.getParameterMap()));
+        logger.info("STATUS={}#URI={}#ARGUMENTS={}", response.getStatus(), getRequestURI(request), JSONExtend.toJSON(request.getParameterMap()));
         return true;
     }
 

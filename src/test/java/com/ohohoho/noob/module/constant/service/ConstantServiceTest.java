@@ -1,6 +1,6 @@
 package com.ohohoho.noob.module.constant.service;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 import com.ohohoho.noob.config.DruidDBConfig;
 import com.ohohoho.noob.config.TransactionConfig;
 import com.ohohoho.noob.constant.ProjectConstant;
@@ -50,12 +50,12 @@ public class ConstantServiceTest extends AbstractTransactionalTestNGSpringContex
 
     @Test(dependsOnMethods = "testInsert")
     public void testFindByKey() throws Exception {
-        logger.info(JSONUtils.toJSON(constantService.findByKey(key)));
+        logger.info(JSONExtend.toJSON(constantService.findByKey(key)));
     }
 
     @Test(dependsOnMethods = "testInsert")
     public void testFindChildrenByParentId() throws Exception {
-        logger.info(JSONUtils.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
+        logger.info(JSONExtend.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
     }
 
 }

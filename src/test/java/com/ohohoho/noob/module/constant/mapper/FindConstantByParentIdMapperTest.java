@@ -1,6 +1,6 @@
 package com.ohohoho.noob.module.constant.mapper;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.ohohoho.noob.config.DruidDBConfig;
@@ -38,6 +38,6 @@ public class FindConstantByParentIdMapperTest extends AbstractTestNGSpringContex
     public void test() {
         ISelect select = () -> mapper.select(new ConstantChild(ProjectConstant.TOP_ID));
         List<ConstantChild> list = PageHelper.startPage(1, 1).doSelectPage(select);
-        LOGGER.info(JSONUtils.toJSON(list));
+        LOGGER.info(JSONExtend.toJSON(list));
     }
 }

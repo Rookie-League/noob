@@ -1,6 +1,6 @@
 package com.ohohoho.noob.module.constant.mapper;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 import com.ohohoho.noob.config.DruidDBConfig;
 import com.ohohoho.noob.config.TransactionConfig;
 import com.ohohoho.noob.constant.ProjectConstant;
@@ -38,6 +38,6 @@ public class InserNewConstantMapperTest extends AbstractTransactionalTestNGSprin
         constant.setValue("yoyoyo");
         constant.setParentId(ProjectConstant.TOP_ID);
         constant.setOperUser("test");
-        LOGGER.info(JSONUtils.toJSON(mapper.insertSelective(constant)));
+        LOGGER.info(JSONExtend.toJSON(mapper.insertSelective(constant)));
     }
 }

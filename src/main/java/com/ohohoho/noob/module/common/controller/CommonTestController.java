@@ -1,6 +1,6 @@
 package com.ohohoho.noob.module.common.controller;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 import com.earphone.wrapper.annotation.LogPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohohoho.noob.constant.ProjectConstant;
@@ -32,8 +32,8 @@ public class CommonTestController {
     @LogPoint("test")
     public Object test(TestRequest request) throws Exception {
         logger.info(new ObjectMapper().writeValueAsString(request));
-        logger.info(JSONUtils.toJSON(constantService.findByKey("666")));
-        logger.info(JSONUtils.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
+        logger.info(JSONExtend.toJSON(constantService.findByKey("666")));
+        logger.info(JSONExtend.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
         return request;
     }
 

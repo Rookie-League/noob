@@ -1,6 +1,6 @@
 package com.ohohoho.noob.mq.message;
 
-import com.earphone.common.utils.JSONUtils;
+import com.earphone.common.utils.JSONExtend;
 
 /**
  * @author YaoJiamin
@@ -30,6 +30,6 @@ public class JSONMessage {
 
     @Override
     public String toString() {
-        return JSONUtils.toJSON(this);
+        return JSONExtend.toJSON(this);
     }
 }

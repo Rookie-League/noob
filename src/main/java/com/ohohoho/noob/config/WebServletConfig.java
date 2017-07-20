@@ -1,6 +1,5 @@
 package com.ohohoho.noob.config;
 
-import com.earphone.common.constant.Charset;
 import com.earphone.wrapper.aspect.ResultWrapAspect;
 import com.ohohoho.noob.interceptor.RequestLogInterceptor;
 import org.slf4j.Logger;
@@ -13,6 +12,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import static com.earphone.common.constant.Charset.UTF8;
 
 /**
  * Created by YaoJiamin on 2016/12/9.
@@ -44,7 +45,7 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
     public FilterRegistrationBean filterRegistrationBean() {
         logger.info("####################Initial CharacterEncodingFilter####################");
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(new CharacterEncodingFilter(Charset.UTF_8.getCharset(), true));
+        registrationBean.setFilter(new CharacterEncodingFilter(UTF8.getValue(), true));
         registrationBean.setMatchAfter(false);
         registrationBean.addUrlPatterns("/");
         return registrationBean;

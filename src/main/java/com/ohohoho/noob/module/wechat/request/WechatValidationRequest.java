@@ -1,6 +1,6 @@
 package com.ohohoho.noob.module.wechat.request;
 
-import com.earphone.common.utils.StringUtils;
+import com.earphone.common.utils.StringExtend;
 
 import java.util.Arrays;
 
@@ -51,10 +51,10 @@ public class WechatValidationRequest {
     public String getParameterString(String token) {
         String[] encryptArgs = {token, timestamp, nonce};
         Arrays.sort(encryptArgs);
-        return StringUtils.join(encryptArgs, "");
+        return StringExtend.join(encryptArgs, "");
     }
 
     public Boolean validate() {
-        return (StringUtils.isBlank(signature) || StringUtils.isBlank(nonce) || StringUtils.isBlank(timestamp)) ? Boolean.FALSE : Boolean.TRUE;
+        return (StringExtend.isBlank(signature) || StringExtend.isBlank(nonce) || StringExtend.isBlank(timestamp)) ? Boolean.FALSE : Boolean.TRUE;
     }
 }
