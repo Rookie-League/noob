@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF8"?>
+<configuration scan="false" scanPeriod="10 seconds" debug="false">
+    <!--定义日志输出等级-->
+    <property name="LOG_LEVEL" value="info"/>
+
+    <!--Spring Boot默认的logback配置-->
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+
+    <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+    <!--具体配置详见：https://logback.qos.ch/manual/layouts.html-->
+    <!--如果表达式中没有堆栈输出信息格式化字符，PatternLayout的安全机制会静默追加一个%xThrowable，要避免这种情况，需要使用%nopex-->
+    <property name="LOG_PATTERN" value="%-5p |-%d{yyyy-MM-dd HH:mm:ss.SSS}-|-%c[%L]-[%t]| %msg%n %ex"/>
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 日志输出编码 -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 日志输出级别 -->
+    <root level="${LOG_LEVEL}" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
