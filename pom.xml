@@ -20,6 +20,12 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <druid.version>1.0.13</druid.version>
         <aspectj.version>1.8.7</aspectj.version>
         <cglib.version>3.1</cglib.version>
@@ -30,7 +36,9 @@
         <mybatis.spring.version>1.2.0</mybatis.spring.version>
         <mybatis.typehandler.version>1.0.1</mybatis.typehandler.version>
         <json.lib.version>2.4</json.lib.version>
-        <earphone.version>0.0.2-SNAPSHOT</earphone.version>
+        <earphone.wrapper.version>0.0.3-SNAPSHOT</earphone.wrapper.version>
+        <earphone.common.version>0.0.3-SNAPSHOT</earphone.common.version>
+        <earphone.schedule.version>0.0.2-SNAPSHOT</earphone.schedule.version>
         <shiro.version>1.2.2</shiro.version>
         <testng.version>6.8.5</testng.version>
         <jacoco.version>0.7.9</jacoco.version>
@@ -41,17 +49,17 @@
             <dependency>
                 <groupId>com.littlearphone</groupId>
                 <artifactId>common</artifactId>
-                <version>${earphone.version}</version>
+                <version>${earphone.common.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.littlearphone</groupId>
                 <artifactId>schedule</artifactId>
-                <version>${earphone.version}</version>
+                <version>${earphone.schedule.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.littlearphone</groupId>
                 <artifactId>wrapper</artifactId>
-                <version>${earphone.version}</version>
+                <version>${earphone.wrapper.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -134,48 +142,46 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${basedir}/src/main/resources</directory>
             </resource>
         </resources>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco.version}</version>
-                    <executions>
-                        <execution>
-                            <id>pre-test</id>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>post-test</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>pre-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
