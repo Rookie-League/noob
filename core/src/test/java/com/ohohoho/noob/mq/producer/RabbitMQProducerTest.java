@@ -4,7 +4,6 @@ import com.ohohoho.noob.config.RabbitMQConfig;
 import com.ohohoho.noob.mq.message.JSONMessage;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -29,7 +28,7 @@ public class RabbitMQProducerTest extends AbstractTestNGSpringContextTests {
     @Resource
     private RabbitMQProducer rabbitMQProducer;
 
-    @Test
+    @Test(enabled = false, groups = "integration")
     public void testSendDelayMessage() throws Exception {
         JSONMessage message = new JSONMessage();
         message.setKey("RabbitMQ");
