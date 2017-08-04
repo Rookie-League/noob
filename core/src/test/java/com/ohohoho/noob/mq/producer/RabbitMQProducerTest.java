@@ -1,6 +1,6 @@
 package com.ohohoho.noob.mq.producer;
 
-import com.ohohoho.noob.config.RabbitMQConfig;
+import com.ohohoho.noob.config.mq.RabbitMQConfig;
 import com.ohohoho.noob.mq.message.JSONMessage;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

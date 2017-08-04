@@ -1,9 +1,8 @@
 package com.ohohoho.noob.module.authority.service;
 
-import com.ohohoho.noob.config.DruidDBConfig;
-import com.ohohoho.noob.config.TransactionConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.ohohoho.noob.config.db.DruidDataSourceConfig;
+import com.ohohoho.noob.config.db.TransactionConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,14 +17,10 @@ import org.testng.annotations.Test;
  */
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.ohohoho.noob.module.authority.service"})
-@ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {TransactionConfig.class, DruidDataSourceConfig.class}, loader = SpringBootContextLoader.class)
+@Slf4j
 public class AuthorityTest extends AbstractTestNGSpringContextTests {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorityTest.class);
-
     @Test
     public void test() {
-
     }
-
 }

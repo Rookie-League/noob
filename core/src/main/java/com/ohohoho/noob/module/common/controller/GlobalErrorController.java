@@ -1,14 +1,14 @@
 package com.ohohoho.noob.module.common.controller;
 
+import com.earphone.wrapper.WrapPoint;
 import org.springframework.boot.autoconfigure.web.ErrorController;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping
 public class GlobalErrorController implements ErrorController {
     private static final int FORBIDDEN = 403;
     private static final int NOT_FOUND = 404;
@@ -21,17 +21,16 @@ public class GlobalErrorController implements ErrorController {
     }
 
     @RequestMapping(PATH)
-    public void error(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @WrapPoint(forceFailure = true, serialize = false)
+    public Object error(HttpServletRequest request, HttpServletResponse response) throws Exception {
         switch (response.getStatus()) {
             case FORBIDDEN:
-                request.getRequestDispatcher("/403.html").forward(request, response);
-                break;
+                return "No Permission";
             case NOT_FOUND:
-                request.getRequestDispatcher("/404.html").forward(request, response);
-                break;
+                return "Not Found";
             case INTERNAL_SERVER_ERROR:
-                request.getRequestDispatcher("/500.html").forward(request, response);
-                break;
+                return "Fatal Error";
         }
+        return "System Error";
     }
 }

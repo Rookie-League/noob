@@ -3,10 +3,11 @@ package com.ohohoho.noob.module.constant.mapper;
 import com.earphone.common.utils.JSONExtend;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
-import com.ohohoho.noob.config.DruidDBConfig;
-import com.ohohoho.noob.config.TransactionConfig;
+import com.ohohoho.noob.config.db.DruidDataSourceConfig;
+import com.ohohoho.noob.config.db.TransactionConfig;
 import com.ohohoho.noob.constant.ProjectConstant;
 import com.ohohoho.noob.module.constant.domain.ConstantChild;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,9 +29,9 @@ import java.util.List;
 //@SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.ohohoho.noob.module.constant.mapper"})
-@ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {TransactionConfig.class, DruidDataSourceConfig.class}, loader = SpringBootContextLoader.class)
+@Slf4j
 public class FindConstantByParentIdMapperTest extends AbstractTestNGSpringContextTests {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FindConstantByParentIdMapperTest.class);
     @Resource
     private FindConstantByParentIdMapper mapper;
 
@@ -38,6 +39,6 @@ public class FindConstantByParentIdMapperTest extends AbstractTestNGSpringContex
     public void test() {
         ISelect select = () -> mapper.select(new ConstantChild(ProjectConstant.TOP_ID));
         List<ConstantChild> list = PageHelper.startPage(1, 1).doSelectPage(select);
-        LOGGER.info(JSONExtend.toJSON(list));
+        log.info(JSONExtend.asPrettyJSON(list));
     }
 }

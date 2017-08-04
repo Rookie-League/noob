@@ -1,13 +1,18 @@
-package com.ohohoho.noob.config;
+package com.ohohoho.noob.config.db;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+
+import static com.ohohoho.noob.config.db.DruidDataSourceEnvironment.PASSWORD;
+import static com.ohohoho.noob.config.db.DruidDataSourceEnvironment.URL;
+import static com.ohohoho.noob.config.db.DruidDataSourceEnvironment.USERNAME;
 
 /**
  * @author YaoJiamin
@@ -16,7 +21,8 @@ import java.sql.SQLException;
  * @createTime 8:57
  */
 @Configuration
-public class DruidDBConfig {
+@Conditional(DruidDataSourceConfigurationCondition.class)
+public class DruidDataSourceConfig {
     @Value("${spring.datasource.url}")
     private String dbUrl;
     @Value("${spring.datasource.username}")
@@ -58,19 +64,21 @@ public class DruidDBConfig {
     @Primary
     @Bean(value = "dataSource")
     public DataSource dataSource() throws SQLException {
-        StringBuilder url = new StringBuilder("jdbc:mysql://");
-        url.append(System.getenv("noob.mysql.host")).append(":");
-        url.append(System.getenv("noob.mysql.port")).append("/");
-        url.append(System.getenv("noob.mysql.db")).append("?");
-        url.append("useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round");
         DruidDataSource datasource = new DruidDataSource();
-//        datasource.setUrl(this.dbUrl);
+//        datasource.setDriverClassName(driverClassName);
+//        datasource.setUrl(dbUrl);
 //        datasource.setUsername(username);
 //        datasource.setPassword(password);
-        datasource.setUrl(url.toString());
-        datasource.setUsername(System.getenv("noob.mysql.username"));
-        datasource.setPassword(System.getenv("noob.mysql.password"));
-        datasource.setDriverClassName(driverClassName);
+//###############################################################
+//        StringBuilder url = new StringBuilder("jdbc:mysql://");
+//        url.append(System.getenv("noob.jdbc.host")).append(":");
+//        url.append(System.getenv("noob.jdbc.port")).append("/");
+//        url.append(System.getenv("noob.jdbc.db")).append("?");
+//        url.append("useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round");
+//        datasource.setUrl(url.toString());
+        datasource.setUrl(URL.getValue());
+        datasource.setUsername(USERNAME.getValue());
+        datasource.setPassword(PASSWORD.getValue());
         //configuration
         datasource.setInitialSize(initialSize);
         datasource.setMinIdle(minIdle);

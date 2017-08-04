@@ -1,7 +1,5 @@
-package com.ohohoho.noob.config;
+package com.ohohoho.noob.config.mq;
 
-import com.earphone.common.utils.StringExtend;
-import com.ohohoho.noob.config.RabbitMQConfig.RabbitMQEnableCondition;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -16,12 +14,13 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Condition;
-import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.type.AnnotatedTypeMetadata;
 
+import static com.ohohoho.noob.config.mq.RabbitMQEnvironment.HOST;
+import static com.ohohoho.noob.config.mq.RabbitMQEnvironment.PASSWORD;
+import static com.ohohoho.noob.config.mq.RabbitMQEnvironment.PORT;
+import static com.ohohoho.noob.config.mq.RabbitMQEnvironment.USERNAME;
 import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_CONTAINER_FACTORY;
 import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_EXCHANGE;
 import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_QUEUE;
@@ -35,15 +34,8 @@ import static com.ohohoho.noob.constant.PublicConstant.NOOB_RABBIT_DEMO_ROUTE_KE
  */
 @Configuration
 @EnableRabbit
-@Conditional(RabbitMQEnableCondition.class)
+@Conditional(RabbitMQConfigurationCondition.class)
 public class RabbitMQConfig {
-    static class RabbitMQEnableCondition implements Condition {
-        @Override
-        public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return StringExtend.isNoneBlank(context.getEnvironment().getProperty("noob.rabbitmq.host"));
-        }
-    }
-
     @Bean
     public AmqpAdmin amqpAdmin() {
         AmqpAdmin amqpAdmin = new RabbitAdmin(rabbitConnectionFactory());
@@ -93,10 +85,10 @@ public class RabbitMQConfig {
     public CachingConnectionFactory rabbitConnectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setCacheMode(CacheMode.CONNECTION);
-        connectionFactory.setHost(System.getenv("noob.rabbitmq.host"));
-        connectionFactory.setPort(Integer.valueOf(System.getenv("noob.rabbitmq.port")));
-        connectionFactory.setUsername(System.getenv("noob.rabbitmq.username"));
-        connectionFactory.setPassword(System.getenv("noob.rabbitmq.password"));
+        connectionFactory.setHost(HOST.getValue());
+        connectionFactory.setPort(Integer.valueOf(PORT.getValue()));
+        connectionFactory.setUsername(USERNAME.getValue());
+        connectionFactory.setPassword(PASSWORD.getValue());
         connectionFactory.getRabbitConnectionFactory().setAutomaticRecoveryEnabled(false);
         return connectionFactory;
     }

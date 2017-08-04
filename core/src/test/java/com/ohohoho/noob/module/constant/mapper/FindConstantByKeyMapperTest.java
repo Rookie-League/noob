@@ -1,11 +1,10 @@
 package com.ohohoho.noob.module.constant.mapper;
 
 import com.earphone.common.utils.JSONExtend;
-import com.ohohoho.noob.config.DruidDBConfig;
-import com.ohohoho.noob.config.TransactionConfig;
+import com.ohohoho.noob.config.db.DruidDataSourceConfig;
+import com.ohohoho.noob.config.db.TransactionConfig;
 import com.ohohoho.noob.module.constant.domain.FindConstantByKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,14 +23,14 @@ import javax.annotation.Resource;
 //@SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.ohohoho.noob.module.constant.mapper"})
-@ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {TransactionConfig.class, DruidDataSourceConfig.class}, loader = SpringBootContextLoader.class)
+@Slf4j
 public class FindConstantByKeyMapperTest extends AbstractTestNGSpringContextTests {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FindConstantByKeyMapperTest.class);
     @Resource
     private FindConstantByKeyMapper mapper;
 
     @Test
     public void test() {
-        LOGGER.info(JSONExtend.toJSON(mapper.selectOne(new FindConstantByKey("666"))));
+        log.info(JSONExtend.asPrettyJSON(mapper.selectOne(new FindConstantByKey("666"))));
     }
 }

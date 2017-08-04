@@ -1,12 +1,10 @@
 package com.ohohoho.noob.module.constant.service;
 
 import com.earphone.common.utils.JSONExtend;
-import com.ohohoho.noob.config.DruidDBConfig;
-import com.ohohoho.noob.config.TransactionConfig;
-import com.ohohoho.noob.constant.ProjectConstant;
+import com.ohohoho.noob.config.db.DruidDataSourceConfig;
+import com.ohohoho.noob.config.db.TransactionConfig;
 import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +15,7 @@ import org.testng.annotations.Test;
 
 import javax.annotation.Resource;
 
+import static com.ohohoho.noob.constant.ProjectConstant.TOP_ID;
 
 /**
  * @author YaoJiamin
@@ -28,34 +27,30 @@ import javax.annotation.Resource;
 //@SpringBootTest(webEnvironment = WebEnvironment.NONE)
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.ohohoho.noob.module.constant.service"})
-@ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {TransactionConfig.class, DruidDataSourceConfig.class}, loader = SpringBootContextLoader.class)
+@Slf4j
 public class ConstantServiceTest extends AbstractTransactionalTestNGSpringContextTests {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    private final String key = "ahahaha";
     @Resource
     private ConstantService constantService;
-
-    private final String key = "ahahaha";
 
     @Test
     public void testInsert() throws Exception {
         InsertNewConstant constant = new InsertNewConstant();
         constant.setKey(key);
         constant.setValue("yoyoyo");
-        constant.setParentId(ProjectConstant.TOP_ID);
+        constant.setParentId(TOP_ID);
         constant.setOperUser("test");
         Assert.assertEquals(constantService.insert(constant), 1);
     }
 
     @Test(dependsOnMethods = "testInsert")
     public void testFindByKey() throws Exception {
-        logger.info(JSONExtend.toJSON(constantService.findByKey(key)));
+        log.info(JSONExtend.asPrettyJSON(constantService.findByKey(key)));
     }
 
     @Test(dependsOnMethods = "testInsert")
     public void testFindChildrenByParentId() throws Exception {
-        logger.info(JSONExtend.toJSON(constantService.findChildrenByParentId(ProjectConstant.TOP_ID)));
+        log.info(JSONExtend.asPrettyJSON(constantService.findChildrenByParentId(TOP_ID)));
     }
-
 }

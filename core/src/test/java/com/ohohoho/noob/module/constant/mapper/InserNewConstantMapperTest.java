@@ -1,10 +1,11 @@
 package com.ohohoho.noob.module.constant.mapper;
 
 import com.earphone.common.utils.JSONExtend;
-import com.ohohoho.noob.config.DruidDBConfig;
-import com.ohohoho.noob.config.TransactionConfig;
+import com.ohohoho.noob.config.db.DruidDataSourceConfig;
+import com.ohohoho.noob.config.db.TransactionConfig;
 import com.ohohoho.noob.constant.ProjectConstant;
 import com.ohohoho.noob.module.constant.domain.InsertNewConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -25,9 +26,9 @@ import javax.annotation.Resource;
 //@SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.ohohoho.noob.module.constant.mapper"})
-@ContextConfiguration(classes = {TransactionConfig.class, DruidDBConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {TransactionConfig.class, DruidDataSourceConfig.class}, loader = SpringBootContextLoader.class)
+@Slf4j
 public class InserNewConstantMapperTest extends AbstractTransactionalTestNGSpringContextTests {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InserNewConstantMapperTest.class);
     @Resource
     private InsertNewConstantMapper mapper;
 
@@ -38,6 +39,6 @@ public class InserNewConstantMapperTest extends AbstractTransactionalTestNGSprin
         constant.setValue("yoyoyo");
         constant.setParentId(ProjectConstant.TOP_ID);
         constant.setOperUser("test");
-        LOGGER.info(JSONExtend.asJSON(mapper.insertSelective(constant)));
+        log.info(JSONExtend.asJSON(mapper.insertSelective(constant)));
     }
 }
