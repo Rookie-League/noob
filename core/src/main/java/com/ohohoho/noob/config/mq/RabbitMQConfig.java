@@ -86,7 +86,7 @@ public class RabbitMQConfig {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setCacheMode(CacheMode.CONNECTION);
         connectionFactory.setHost(HOST.getValue());
-        connectionFactory.setPort(Integer.valueOf(PORT.getValue()));
+        connectionFactory.setPort(Integer.parseInt(PORT.getValue()));
         connectionFactory.setUsername(USERNAME.getValue());
         connectionFactory.setPassword(PASSWORD.getValue());
         connectionFactory.getRabbitConnectionFactory().setAutomaticRecoveryEnabled(false);

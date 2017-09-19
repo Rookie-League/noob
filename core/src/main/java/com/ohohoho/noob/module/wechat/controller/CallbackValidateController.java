@@ -3,7 +3,7 @@ package com.ohohoho.noob.module.wechat.controller;
 import com.earphone.common.utils.Signature;
 import com.earphone.common.utils.StringExtend;
 import com.earphone.common.validation.Assert;
-import com.earphone.wrapper.annotation.LogPoint;
+import com.earphone.wrapper.WrapPoint;
 import com.ohohoho.noob.module.wechat.request.WechatValidationRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CallbackValidateController {
     private static final String token = "87cd1ff404bb416fa49ad54406199f95";
 
-    @LogPoint(wrapped = false)
+    @WrapPoint(wrapped = false)
     @RequestMapping(method = RequestMethod.GET)
     public String validation(WechatValidationRequest request) {
         Assert.wrapBoolean(request.validate()).isTrue("Wechat parameters missing!!!");
@@ -31,7 +31,7 @@ public class CallbackValidateController {
         return request.getEchostr();
     }
 
-    @LogPoint(wrapped = false)
+    @WrapPoint(wrapped = false)
     @RequestMapping(method = RequestMethod.POST)
     public String handler() {
         return "";

@@ -2,22 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.ohohoho</groupId>
     <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.1.RELEASE</version>
     </parent>
-
     <modules>
         <module>core</module>
     </modules>
-
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -25,10 +21,10 @@
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <earphone.common.version>0.0.7-SNAPSHOT</earphone.common.version>
         <earphone.schedule.version>0.0.2-SNAPSHOT</earphone.schedule.version>
         <earphone.wrapper.version>0.0.11-SNAPSHOT</earphone.wrapper.version>
+        <scala.version>2.12.3</scala.version>
         <druid.version>1.0.13</druid.version>
         <aspectj.version>1.8.7</aspectj.version>
         <cglib.version>3.1</cglib.version>
@@ -43,7 +39,6 @@
         <testng.version>6.8.5</testng.version>
         <jacoco.version>0.7.9</jacoco.version>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -60,6 +55,22 @@
                 <groupId>com.littlearphone</groupId>
                 <artifactId>wrapper</artifactId>
                 <version>${earphone.wrapper.version}</version>
+            </dependency>
+            <!--Scala SDK-->
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-compiler</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-reflect</artifactId>
+                <version>${scala.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -128,7 +139,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <finalName>${project.artifactId}</finalName>
         <!--这个元素描述了项目相关的所有资源路径列表，例如和项目相关的属性文件，这些资源被包含在最终的打包文件里。-->
@@ -167,21 +177,104 @@
                 <version>${jacoco.version}</version>
                 <executions>
                     <execution>
-                        <id>pre-test</id>
+                        <!--存在多个execution的时候需要定义唯一id-->
+                        <id>jacoco-prepare</id>
                         <goals>
+                            <!--配置goal的时候要注意phase,如果不匹配会出不来exec数据文件-->
                             <goal>prepare-agent</goal>
+                            <goal>report</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>post-test</id>
-                        <phase>test</phase>
+                    <!--
+                        如果用integration的话,需要单独配置phase,而且,
+                        数据文件名称默认为jacoco-it.exec,所以需要稍微修改一下配置.
+                    -->
+                    <!--<execution>
+                        <id>jacoco-verify</id>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>report-integration</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>jacoco.exe</dataFile>
+                        </configuration>
+                    </execution>-->
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.8</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>pmd</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <linkXRef>true</linkXRef>
+                    <sourceEncoding>utf-8</sourceEncoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>findbugs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 设置分析工作的等级，可以为Min、Default和Max -->
+                    <effort>Max</effort>
+                    <!-- Low、Medium和High (Low最严格) -->
+                    <threshold>Low</threshold>
+                    <xmlOutput>true</xmlOutput>
+                    <findbugsXmlOutput>true</findbugsXmlOutput>
+                    <!--findbugs需要忽略的错误的配置文件-->
+                    <!--<excludeFilterFile>findbugs/findbugs-exclude-filter.xml</excludeFilterFile>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
+    <reporting>
+        <outputDirectory>${project.build.directory}/${artifactId}</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

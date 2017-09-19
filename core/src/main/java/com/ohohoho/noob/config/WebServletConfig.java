@@ -1,6 +1,5 @@
 package com.ohohoho.noob.config;
 
-import com.earphone.wrapper.aspect.ResultWrapAspect;
 import com.ohohoho.noob.interceptor.RequestLogInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,12 +32,6 @@ public class WebServletConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("forward:/index.html");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
-    }
-
-    @Bean
-    public ResultWrapAspect resultWrapAspect() {
-        logger.info("####################Initial ResultWrapAspect####################");
-        return new ResultWrapAspect();
     }
 
     @Bean
