@@ -140,7 +140,7 @@
                                 <!--输出所有属性值-->
                                 <!--<echoproperties/>-->
                                 <echo message="********************Start copy profile property file*************************"/>
-                                <copy todir="${user.dir}/target/tmcp-parent/${project.artifactId}" overwrite="true">
+                                <copy todir="${user.dir}/target/parent/${project.artifactId}" overwrite="true">
                                     <fileset dir="${project.build.directory}/${project.artifactId}">
                                         <include name="**/*"/>
                                     </fileset>

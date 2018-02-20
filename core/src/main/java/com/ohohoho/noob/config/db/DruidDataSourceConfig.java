@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import static com.ohohoho.noob.config.db.DruidDataSourceEnvironment.PASSWORD;
-import static com.ohohoho.noob.config.db.DruidDataSourceEnvironment.URL;
 import static com.ohohoho.noob.config.db.DruidDataSourceEnvironment.USERNAME;
 
 /**
@@ -76,7 +75,7 @@ public class DruidDataSourceConfig {
 //        url.append(System.getenv("noob.jdbc.db")).append("?");
 //        url.append("useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round");
 //        datasource.setUrl(url.toString());
-        datasource.setUrl(URL.getValue());
+        datasource.setUrl(DruidDataSourceEnvironment.getUrl());
         datasource.setUsername(USERNAME.getValue());
         datasource.setPassword(PASSWORD.getValue());
         //configuration
